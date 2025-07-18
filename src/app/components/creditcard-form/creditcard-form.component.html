@@ -1,1 +1,68 @@
-<p>creditcard-form works!</p>
+
+<!-- src/app/payment-form/payment-form.component.html -->
+<mat-card class="payment-card-container">
+    <mat-card-title>Validación de Tarjeta de Crédito</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" novalidate>
+        
+        <!-- Campo Número de Tarjeta -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Número de Tarjeta</mat-label>
+            <input 
+                matInput type="text" 
+                formControlName="number" 
+                data-test-id="number-input" 
+                placeholder="Card Number" 
+                maxlength="16">
+            <mat-error data-test-id="number-input-error" *ngIf="cardForm.get('number')?.touched && cardForm.get('number')?.invalid">
+            Número no válido (debe tener 16 dígitos).
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo Nombre -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre en la Tarjeta</mat-label>
+            <input matInput type="text" formControlName="name" data-test-id="name-input" placeholder="Name on card">
+            <mat-error data-test-id="name-input-error" *ngIf="cardForm.get('name')?.touched && cardForm.get('name')?.invalid">
+            Nombre no válido.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Fila para Fecha y CVV -->
+        <div class="form-row">
+            <!-- Mes -->
+            <mat-form-field appearance="outline">
+            <mat-label>Mes</mat-label>
+            <input matInput type="text" formControlName="month" data-test-id="month-input" placeholder="MM" maxlength="2">
+            <mat-error data-test-id="month-input-error" *ngIf="cardForm.get('month')?.touched && cardForm.get('month')?.invalid">
+                Mes no válido.
+            </mat-error>
+            </mat-form-field>
+
+            <!-- Año -->
+            <mat-form-field appearance="outline">
+            <mat-label>Año</mat-label>
+            <input matInput type="text" formControlName="year" data-test-id="year-input" placeholder="YYYY" maxlength="4">
+            <mat-error data-test-id="year-input-error" *ngIf="cardForm.get('year')?.touched && cardForm.get('year')?.invalid">
+                Año no válido.
+            </mat-error>
+            </mat-form-field>
+
+            <!-- CVV -->
+            <mat-form-field appearance="outline">
+            <mat-label>CVV</mat-label>
+            <input matInput type="text" formControlName="cvv" data-test-id="cvv-input" placeholder="CVV" maxlength="3">
+            <mat-error data-test-id="cvv-input-error" *ngIf="cardForm.get('cvv')?.touched && cardForm.get('cvv')?.invalid">
+                CVV no válido.
+            </mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Botón de Envío -->
+        <button mat-raised-button color="primary" class="full-width submit-button" type="submit" [disabled]="!isFormValid" data-test-id="submit-button">
+            Submit
+        </button>
+
+        </form>
+    </mat-card-content>
+</mat-card>

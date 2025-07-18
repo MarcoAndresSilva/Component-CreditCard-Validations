@@ -1,0 +1,23 @@
+.payment-card-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px; // Espacio entre campos
+    width: 100%;
+}
+
+.form-row mat-form-field {
+    flex: 1; // Distribuye el espacio equitativamente
+}
+
+.submit-button {
+    margin-top: 20px;
+}
